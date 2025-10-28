@@ -1,6 +1,12 @@
 from dotenv import load_dotenv
 load_dotenv()
 
+#Copyright ©️ 2022 TeLe TiPs. All Rights Reserved
+#You are free to use this code in any of your project, but you MUST include the following in your README.md (Copy & paste)
+# ##Credits - [Ping All Telegram bot by TeLe TiPs] (https://github.com/teletips/PingAllBot-teletips)
+
+# Changing the code is not allowed! Read GNU AFFERO GENERAL PUBLIC LICENSE: https://github.com/teletips/PingAllBot-teletips/blob/main/LICENSE
+
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import os
@@ -38,7 +44,7 @@ async def everyone(client, message):
         else:  
           chatQueue.append(message.chat.id)
           if len(message.command) > 1:
-            inputText = message.command[1]
+            inputText = " ".join(message.command[1:])
           elif len(message.command) == 1:
             inputText = ""    
           membersList = []
@@ -260,3 +266,5 @@ If you have any questions on how to use me, feel free to ask in my [support grou
 
 print("PingAll is alive!")  
 teletips.run()
+ 
+#Copyright ©️ 2021 TeLe TiPs. All Rights Reserved 
