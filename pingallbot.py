@@ -1,12 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-#Copyright ©️ 2022 TeLe TiPs. All Rights Reserved
-#You are free to use this code in any of your project, but you MUST include the following in your README.md (Copy & paste)
-# ##Credits - [Ping All Telegram bot by TeLe TiPs] (https://github.com/teletips/PingAllBot-teletips)
-
-# Changing the code is not allowed! Read GNU AFFERO GENERAL PUBLIC LICENSE: https://github.com/teletips/PingAllBot-teletips/blob/main/LICENSE
-
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import os
@@ -17,10 +11,11 @@ from pyrogram.errors import FloodWait
 
 teletips=Client(
     "PingAllBot",
-    api_id = int(os.environ["API_ID"]),           # <-- ဒီလို "API_ID" လို့ ပြန်ပြင်ပါ
-    api_hash = os.environ["API_HASH"],         # <-- ဒီလို "API_HASH" လို့ ပြန်ပြင်ပါ
-    bot_token = os.environ["BOT_TOKEN"]      # <-- ဒီလို "BOT_TOKEN" လို့ ပြန်ပြင်ပါ
+    api_id = int(os.environ["API_ID"]),
+    api_hash = os.environ["API_HASH"],
+    bot_token = os.environ["BOT_TOKEN"]
 )
+
 chatQueue = []
 
 stopProcess = False
@@ -265,5 +260,3 @@ If you have any questions on how to use me, feel free to ask in my [support grou
 
 print("PingAll is alive!")  
 teletips.run()
- 
-#Copyright ©️ 2021 TeLe TiPs. All Rights Reserved 
