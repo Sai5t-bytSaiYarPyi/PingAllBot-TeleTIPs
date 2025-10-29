@@ -43,10 +43,22 @@ async def everyone(client, message):
           await message.reply("🚫 | There's already an ongoing process in this chat. Please /stop to start a new one.")
         else:  
           chatQueue.append(message.chat.id)
+          
+          # --- (ပြင်ဆင်မှု ၁) မူရင်း message format ကို မပျောက်အောင် ယူခြင်း ---
           if len(message.command) > 1:
-            inputText = " ".join(message.command[1:])
+            # Get the raw text after the command, preserving newlines
+            inputText = message.text.split(message.command[0], 1)[1].lstrip()
           elif len(message.command) == 1:
-            inputText = ""    
+            inputText = ""   
+            
+          # --- (ပြင်ဆင်မှု ၂) Admin message ကို ၅ စက္ကန့်အတွင်း ဖျက်ခြင်း ---
+          # Delete the admin's /all command message after 5 seconds
+          await asyncio.sleep(5)
+          try:
+            await message.delete()
+          except Exception:
+            pass # Ignore if bot can't delete messages
+          
           membersList = []
           async for member in teletips.get_chat_members(message.chat.id):
             if member.user.is_bot == True:
@@ -82,10 +94,13 @@ async def everyone(client, message):
               except Exception:
                 pass  
               i = i+j
-          if i == lenMembersList:    
-            await message.reply(f"✅ | Successfully mentioned **total number of {i} members**.\n❌ | Bots and deleted accounts were rejected.") 
-          else:
-            await message.reply(f"✅ | Successfully mentioned **{i} members.**\n❌ | Bots and deleted accounts were rejected.")    
+              
+          # --- (ပြင်ဆင်မှု ၃) Bot ရဲ့ နောက်ဆုံး reply ကို ဖျောက်ခြင်း (Comment out) ---
+          # if i == lenMembersList:    
+          #   await message.reply(f"✅ | Successfully mentioned **total number of {i} members**.\n❌ | Bots and deleted accounts were rejected.") 
+          # else:
+          #   await message.reply(f"✅ | Successfully mentioned **{i} members.**\n❌ | Bots and deleted accounts were rejected.")    
+          
           chatQueue.remove(message.chat.id)
     else:
       await message.reply("👮🏻 | Sorry, **only admins** can execute this command.")  
@@ -267,4 +282,4 @@ If you have any questions on how to use me, feel free to ask in my [support grou
 print("PingAll is alive!")  
 teletips.run()
  
-#Copyright ©️ 2021 TeLe TiPs. All Rights Reserved 
+#Copyright ©️ 2021 TeLe TiPs. All Rights Reserved
